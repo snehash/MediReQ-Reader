@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">MediReQ</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_navigation_drawer">NavigationDrawer</string>
+    <string name="title_activity_behavior">BehaviorActivity</string>
+    <string name="title_activity_contact_information">ContactInformationActivity</string>
+    <string name="title_activity_family_history">FamilyHistoryActivity</string>
+    <string name="title_activity_medical_allergies">MedicalAllergies</string>
+    <string name="title_activity_past_conditions">PastConditionsActivity</string>
+    <string name="title_activity_surgical_history">SurgicalHistory</string>
+</resources>
