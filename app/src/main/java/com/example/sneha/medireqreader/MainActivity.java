@@ -13,6 +13,17 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 
+import org.apache.http.HttpResponse;
+
+import java.io.BufferedInputStream;
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.net.HttpURLConnection;
+import java.net.URL;
+
 
 public class MainActivity extends Activity {
 
@@ -69,10 +80,25 @@ public class MainActivity extends Activity {
         // record 0 contains the MIME type, record 1 is the AAR, if present
         NdefMessage msg = (NdefMessage) rawMsgs[0];
         String jsonProfile = new String(msg.getRecords()[0].getPayload());
-        Profile p = (Profile) json.fromJson(jsonProfile, Profile.class);
+        try {
+            URL url = new URL("http://something.herokuapp.com/");
+            HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
+            urlConnection.setRequestMethod("POST");
+            OutputStream os = urlConnection.getOutputStream();
+            BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(os, "UTF-8"));
+            writer.write(jsonProfile);
+            if (urlConnection.getResponseCode() == 200) {
+                message.setText("Successful POST!");
+            } else {
+                message.setText("Failed POST... :(");
+            }
+        } catch (Exception e) {
+            message.setText("Exception occured...");
+        }
+//        Profile p = (Profile) json.fromJson(jsonProfile, Profile.class);
         //Toast.makeText(this, "Profile for " + p.name + "recieved", Toast.LENGTH_SHORT).show();*/
         // record 0 contains the MIME type, record 1 is the AAR, if present
-        message.setText(p.name);
+//        message.setText(p.name);
     }
 
 
